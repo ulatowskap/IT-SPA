@@ -103,8 +103,6 @@ localStorage.setItem("datafrom", dataFrom);
 localStorage.setItem("datato", dataTo);
 localStorage.setItem("addInfo", addInfo);
 
-let productContainer = document.querySelector(".product-container");
-productContainer.textContent = "Koszyk jest pusty - sprawdź swoje zamówienie w zakładce 'Rezerwacje'";
 
 });
 
@@ -181,7 +179,6 @@ function displayCart() {
     let everythingText = JSON.stringify(everything);
     localStorage.setItem("roomsInCart", everythingText);
     localStorage.setItem("cartNumbers", Object.keys(everything).length);
-    updateNavCartNumber();
 
     let roomElement = e.target.parentNode;
     roomElement.parentNode.removeChild(roomElement);
@@ -192,15 +189,15 @@ function displayCart() {
         let priceName = e.target.getAttribute('data-pricename');
         let full = totalCartCost - priceName;
        localStorage.setItem("totalCost", full);
+let allCost = document.getElementById("total-cost");
+let getFullPrice = localStorage.getItem("totalCost");
 
-       let allCost = document.getElementById("total-cost");
-  let getFullPrice = localStorage.getItem("totalCost");
     if (getFullPrice) {
      let count = parseInt(getFullPrice);
      allCost.textContent = count == 0 ? "" : "Kwota zamówienia: " + getFullPrice + " zł";
       }
     }
-
+    updateNavCartNumber();
     deleteTotalCost();
     disableBtn()
     })
@@ -231,42 +228,41 @@ function displayTreats() {
         treatsContainer.innerHTML += treatsContainerText;
 
       });
-    }
 
-    $(".delete-treat").on("click", function(e){
-      let allTreats = localStorage.getItem("treatsInCart");
-      allTreats = JSON.parse(allTreats);
-    let treatName = e.target.getAttribute('data-treatname');
-    delete allTreats[treatName];
-    let allTreatsText = JSON.stringify(allTreats);
-    localStorage.setItem("treatsInCart", allTreatsText);
-    localStorage.setItem("cartNumbers", Object.keys(allTreats).length);
-    updateNavCartNumber();
-
-    let roomElement = e.target.parentNode;
-    roomElement.parentNode.removeChild(roomElement);
-
-    function deleteTreatCost(){
-let treatCost = localStorage.getItem("totalCost");
-treatCost = parseInt(treatCost);
-let treatName = e.target.getAttribute('data-treatpricename');
-let fullCost = treatCost - treatName;
-localStorage.setItem("totalCost", fullCost);
-let allCost = document.getElementById("total-cost");
-getFullPrice = localStorage.getItem("totalCost");
-if(getFullPrice){
-  let count = parseInt(getFullPrice);
-     allCost.textContent = count == 0 ? "" : "Kwota zamówienia: " + getFullPrice + " zł";
-}
-
-    }
-
-    deleteTreatCost();
-    disableBtn()
-
-    })
-
+      $(".delete-treat").on("click", function(e){
+        let allTreats = localStorage.getItem("treatsInCart");
+        allTreats = JSON.parse(allTreats);
+      let treatName = e.target.getAttribute('data-treatname');
+      delete allTreats[treatName];
+      let allTreatsText = JSON.stringify(allTreats);
+      localStorage.setItem("treatsInCart", allTreatsText);
+      localStorage.setItem("cartNumbers", Object.keys(allTreats).length);
+     
+      let treatElement = e.target.parentNode;
+      treatElement.parentNode.removeChild(treatElement);
+  
+      function deleteTreatCost(){
+  let treatCost = localStorage.getItem("totalCost");
+  treatCost = parseInt(treatCost);
+  let treatName = e.target.getAttribute('data-treatpricename');
+  let fullCost = treatCost - treatName;
+  localStorage.setItem("totalCost", fullCost);
+  let allCost = document.getElementById("total-cost");
+  getPrice = localStorage.getItem("totalCost");
+  
+  if(getPrice){
+    let count = parseInt(getPrice);
+       allCost.textContent = count == 0 ? "" : "Kwota zamówienia: " + getPrice + " zł";
   }
+      }
+      updateNavCartNumber();
+      deleteTreatCost();
+      disableBtn()
+      })
+    }
+    }
+
+   
   
 
 function disableBtn(){

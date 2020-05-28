@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:db": "json-server --watch database.json",
-    "build": "parcel build ./index.html --no-source-maps",
-    "prebuild": "rmdir /s/q dist",
+    "build": "parcel build ./index.html --public-url ./",
     "start:app": "parcel ./index.html --open"
   },
   "keywords": [],
