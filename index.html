@@ -1,12 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>IT SPA</title>
-  <base href="/" target="_self">
-</head>
-<body>
-  <main></main>
-  <p class="text-muted">Copyright © IT SPA. All rights reserved.</p>
-  <script src="src/it-spa.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>IT SPA</title>
+    <base href="/" target="_self" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"
+    />
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  </head>
+  <body>
+    <!-- nawigacja -->
+    <main></main>
+    <p class="text-muted footer">Copyright © IT SPA. All rights reserved.</p>
+    <script>
+      function updateNavCartNumber() {
+        let smallCart = document.getElementById("total-number");
+        let getValue = localStorage.getItem("cartNumbers");
+        if (getValue) {
+          let count = parseInt(getValue);
+          smallCart.textContent = count == 0 ? "" : `${getValue}`;
+        }
+      }
+    </script>
+    <script src="src/it-spa.js"></script>
+  </body>
+</html>
